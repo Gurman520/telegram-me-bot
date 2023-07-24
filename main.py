@@ -48,6 +48,17 @@ def handle_callback(call):
         hd.vk_handler(bot, call.message)
     elif call.data == "/article":
         hd.article_handler(bot, call.message)
+    elif call.data == "/voice":
+        hd.voice_handler(bot, call.message)
+    elif call.data == "/f_love":
+        hd.first_love_handler(bot, call.message)
+    elif call.data == "/sql_vs_nosql":
+        hd.sql_handler(bot, call.message)
+    elif call.data == "/gpt":
+        hd.gpt_handler(bot, call.message)
+    elif call.data == "/sert":
+        hd.cert_handler(bot, call.message)
+
 
 
 print("Start bot")

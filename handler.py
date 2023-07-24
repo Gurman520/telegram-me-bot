@@ -75,7 +75,44 @@ def voice_handler(bot, message):
     print("Telegram bot", "Voice_handler")
     keyboard = kb.create_voice_keyboard()
     chat_id = message.chat.id
-    bot.send_message(chat_id, t, reply_markup=keyboard)
+    bot.send_message(chat_id, t.voice, reply_markup=keyboard)
+
+
+def first_love_handler(bot, message):
+    print("Telegram bot", "First_love_handler")
+    keyboard = kb.create_down_keyboard()
+    audio = open('media/audio/First_love.mp3', 'rb')
+    chat_id = message.chat.id
+    bot.send_voice(chat_id, audio, reply_markup=keyboard)
+    audio.close()
+
+
+def sql_handler(bot, message):
+    print("Telegram bot", "SQL_NoSQL_handler")
+    keyboard = kb.create_down_keyboard()
+    audio = open('media/audio/sql.mp3', 'rb')
+    chat_id = message.chat.id
+    bot.send_voice(chat_id, audio, reply_markup=keyboard)
+    audio.close()
+
+
+def gpt_handler(bot, message):
+    print("Telegram bot", "GPT_handler")
+    keyboard = kb.create_down_keyboard()
+    audio = open('media/audio/gpt.mp3', 'rb')
+    chat_id = message.chat.id
+    bot.send_voice(chat_id, audio, reply_markup=keyboard)
+    audio.close()
+
+
+def cert_handler(bot, message):
+    print("Telegram bot", "Cert_handler")
+    keyboard = kb.create_down_keyboard()
+    chat_id = message.chat.id
+    f = open("media/documents/cert.pdf", "rb")
+    bot.send_document(chat_id, f, reply_markup=keyboard)
+    f.close()
+    
 
 
 def article_handler(bot, message):
@@ -89,6 +126,7 @@ def article_handler(bot, message):
         return 
     text = f.read()
     bot.send_message(chat_id, text, reply_markup=keyboard)
+    f.close()
 
 
 def help_handler(bot, message):
