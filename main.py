@@ -1,8 +1,17 @@
+import os
 from telebot import TeleBot
 import handler as hd
+from dotenv import load_dotenv
 
 
-TOKEN = '' # токен доступа к боту
+dotenv_path = os.path.join('env_bot.env')
+if os.path.exists(dotenv_path):
+    load_dotenv(dotenv_path)
+
+
+TOKEN = os.getenv("TOKEN")
+if TOKEN == None:
+    exit()
 bot = TeleBot(TOKEN)
 
 @bot.message_handler(func=lambda message: True)
@@ -11,6 +20,8 @@ def handle_message(message):
         hd.handle_start(bot, message)
     elif message.text == "/help":
         hd.help_handler(bot, message)
+    elif message.text == "/secret":
+        hd.secret_handler(bot, message)
     else:
         hd.unknown_command_handler(bot, message)
 
@@ -19,6 +30,8 @@ def handle_message(message):
 def handle_callback(call):
     if call.data == "/about":
         hd.about_handler(bot, call.message)
+    elif call.data == "/main":
+        hd.main_menu_handler(bot, call.message)
     elif call.data == "/help":
         hd.help_handler(bot, call.message)
     elif call.data == "/foto":
@@ -29,16 +42,12 @@ def handle_callback(call):
         hd.foto_old_handler(bot, call.message)
     elif call.data == "/code-bot":
         hd.code_bot_handler(bot, call.message)
-    elif call.data == "/secret":
-        hd.secret_handler(bot, call.message)
     elif call.data == "/gitHub":
         hd.gitHub_handler(bot, call.message)
     elif call.data == "/vk":
         hd.vk_handler(bot, call.message)
-    
-
-
-
+    elif call.data == "/article":
+        hd.article_handler(bot, call.message)
 
 
 print("Start bot")
